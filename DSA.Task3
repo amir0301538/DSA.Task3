@@ -1,0 +1,468 @@
+Data Structures
+(Lab)
+Task 3
+Name: Muhammad Aamir
+ SAP ID: 54676
+ Semester: 3rd
+ Implement Following Operations
+1: Stack (int ignored = 0) Requirements: None 
+Results: Constructor. Creates an empty stack.
+#include <iostream>
+using namespace std;
+class Stack {
+private:
+ static const int MAX = 100; 
+ int arr[MAX]; 
+ int top; 
+public:
+ Stack(int ignored = 0) {
+ top = -1; 
+ }
+ bool push(int value) {
+ if (top >= (MAX - 1)) {
+ cout << "Stack Overflow" << endl;
+ return false;
+ }
+ arr[++top] = value; 
+ return true;
+ }
+ int pop() {
+ if (top < 0) {
+ cout << "Stack Underflow" << endl;
+ return -1;
+ }
+ int value = arr[top--]; 
+ return value;
+ }
+ bool isEmpty() {
+ return (top < 0);
+ }
+ int peek() {
+ if (top < 0) {
+ cout << "Stack is Empty" << endl;
+ return -1;
+ }
+ return arr[top];
+ }
+};
+int main() {
+ Stack s; 
+ 
+ s.push(10);
+ s.push(20);
+ s.push(30);
+ cout << "Popped element: " << s.pop() << endl;
+ cout << "Popped element: " << s.pop() << endl;
+ cout << "Top element is: " << s.peek() << endl;
+ if (s.isEmpty()) {
+ cout << "Stack is empty" << endl;
+ } else {
+ cout << "Stack is not empty" << endl;
+ }
+ return 0;
+}
+2: ~Stack () Requirements: None Results: 
+Destructor. Deallocates (frees) the memory used to 
+store a stack.
+#include <iostream>
+using namespace std;
+class Stack {
+private:
+ int* arr; 
+ int top; 
+ int capacity; 
+public:
+ Stack(int size = 100) {
+ capacity = size; 
+ arr = new int[capacity]; 
+ top = -1; 
+ }
+ ~Stack() {
+ delete[] arr; 
+ cout << "Stack memory deallocated." << endl;
+ }
+ bool push(int value) {
+ if (top >= (capacity - 1)) {
+ cout << "Stack Overflow" << endl;
+ return false;
+ }
+ arr[++top] = value; 
+ return true;
+ }
+ int pop() {
+ if (top < 0) {
+ cout << "Stack Underflow" << endl;
+ return -1;
+ }
+ int value = arr[top--]; 
+ return value;
+ }
+ bool isEmpty() {
+ return (top < 0);
+ }
+ int peek() {
+ if (top < 0) {
+ cout << "Stack is Empty" << endl;
+ return -1;
+ }
+ return arr[top];
+ }
+};
+int main() {
+ Stack s(5); 
+ 
+ s.push(10);
+ s.push(20);
+ s.push(30);
+ cout << "Popped element: " << s.pop() << endl;
+ cout << "Popped element: " << s.pop() << endl;
+ cout << "Top element is: " << s.peek() << endl;
+ if (s.isEmpty()) {
+ cout << "Stack is empty" << endl;
+ } else {
+ cout << "Stack is not empty" << endl;
+ }
+ return 0;
+}
+3: void push (const DataItem) Requirements: None 
+Results: Push the element at top of the stack.
+#include <iostream>
+using namespace std;
+struct DataItem {
+ int value; 
+};
+class Stack {
+private:
+ static const int MAX = 100; 
+ DataItem arr[MAX]; objects
+ int top;
+public:
+ Stack() {
+ top = -1;
+ }
+ void push(const DataItem item) {
+ if (top >= (MAX - 1)) {
+ cout << "Stack Overflow" << endl;
+ return;
+ }
+ arr[++top] = item; 
+ cout << "Pushed item with value: " << item.value << endl;
+ }
+ DataItem pop() {
+ if (top < 0) {
+ cout << "Stack Underflow" << endl;
+ return DataItem{ -1 }; 
+ }
+ return arr[top--]; 
+ }
+ bool isEmpty() {
+ return (top < 0);
+ }
+ DataItem peek() {
+ if (top < 0) {
+ cout << "Stack is Empty" << endl;
+ return DataItem{ -1 }; 
+ }
+ return arr[top];
+ }
+};
+int main() {
+ Stack s; 
+ DataItem item1 = {10};
+ DataItem item2 = {20};
+ DataItem item3 = {30};
+ s.push(item1);
+ s.push(item2);
+ s.push(item3);
+ DataItem popped = s.pop();
+ cout << "Popped item with value: " << popped.value << endl;
+ DataItem topItem = s.peek();
+ cout << "Top item after pop has value: " << topItem.value << endl;
+ return 0;
+}
+4: Void pop () Requirements: Stack is not empty 
+Results: Returns the element from the top of the 
+stack.
+#include <iostream>
+using namespace std;
+struct DataItem {
+ int value; 
+};
+class Stack {
+private:
+ static const int MAX = 100; 
+ DataItem arr[MAX]; 
+ int top; 
+public:
+ Stack() {
+ top = -1;
+ }
+ void push(const DataItem item) {
+ if (top >= (MAX - 1)) {
+ cout << "Stack Overflow" << endl;
+ return;
+ }
+ arr[++top] = item; 
+ cout << "Pushed item with value: " << item.value << endl;
+ }
+ int pop() {
+ if (top < 0) {
+ cout << "Stack Underflow" << endl;
+ return -1; 
+ }
+ return arr[top--].value; 
+ }
+ bool isEmpty() {
+ return (top < 0);
+ }
+ DataItem peek() {
+ if (top < 0) {
+ cout << "Stack is Empty" << endl;
+ return DataItem{-1}; 
+ }
+ return arr[top];
+ }
+};
+int main() {
+ Stack s; 
+ DataItem item1 = {10};
+ DataItem item2 = {20};
+ DataItem item3 = {30};
+ s.push(item1);
+ s.push(item2);
+ s.push(item3);
+ int poppedValue = s.pop(); 
+ if (poppedValue != -1) { 
+ cout << "Popped item with value: " << poppedValue << endl;
+ }
+ DataItem topItem = s.peek(); 
+ if (topItem.value != -1) { 
+ cout << "Top item after pop has value: " << topItem.value << endl;
+ }
+ poppedValue = s.pop(); 
+ if (poppedValue != -1) {
+ cout << "Popped item with value: " << poppedValue << endl;
+ }
+ topItem = s.peek(); 
+ if (topItem.value != -1) {
+ cout << "Top item after second pop has value: " << topItem.value << endl;
+ }
+ return 0;
+}
+5: element Peek () return element at the top of 
+stack
+#include <iostream>
+using namespace std;
+// Define the structure for DataItem with only an integer
+struct DataItem {
+ int value; // Single integer value
+};
+// Stack class that works with DataItem
+class Stack {
+private:
+ static const int MAX = 100; // Maximum size of the stack
+ DataItem arr[MAX]; // Array to store DataItem objects
+ int top; // Index to keep track of the top of the stack
+public:
+ // Constructor: Initializes the stack as empty
+ Stack() {
+ top = -1;
+ }
+ // Push function: Adds a DataItem object to the stack
+ void push(const DataItem item) {
+ if (top >= (MAX - 1)) {
+ cout << "Stack Overflow" << endl;
+ return;
+ }
+ arr[++top] = item; // Increment top and add the DataItem to the stack
+ cout << "Pushed item with value: " << item.value << endl;
+ }
+ // Pop function: Removes and returns the value from the top of the stack
+ int pop() {
+ if (top < 0) {
+ cout << "Stack Underflow" << endl;
+ return -1; // Indicates error; this can be adjusted
+ }
+ return arr[top--].value; // Return the value from the top DataItem and 
+decrement the top
+ }
+ // Peek function: Returns the DataItem at the top of the stack without removing 
+it
+ DataItem peek() {
+ if (top < 0) {
+ cout << "Stack is Empty" << endl;
+ return DataItem{-1}; // Return a default DataItem if empty
+ }
+ return arr[top]; // Return the DataItem at the top of the stack
+ }
+ // Function to check if the stack is empty
+ bool isEmpty() {
+ return (top < 0);
+ }
+};
+int main() {
+ Stack s; // Create a stack of DataItem
+ // Create some DataItem objects
+ DataItem item1 = {10};
+ DataItem item2 = {20};
+ DataItem item3 = {30};
+ // Push DataItem objects onto the stack
+ s.push(item1);
+ s.push(item2);
+ s.push(item3);
+ // Peek and display the top item
+ DataItem topItem = s.peek(); // This should show 30
+ if (topItem.value != -1) { // Check if the peek operation was successful
+ cout << "Top item has value: " << topItem.value << endl;
+ }
+ // Pop to remove the top item
+ s.pop(); // Remove 30
+ // Peek again to see the new top item
+ topItem = s.peek(); // This should now show 20
+ if (topItem.value != -1) { // Check if the peek operation was successful
+ cout << "Top item after pop has value: " << topItem.value << endl;
+ }
+ return 0;
+}
+6: void clear () Requirements: None Results: 
+Removes all the elements from a stack.
+#include <iostream>
+using namespace std;
+struct DataItem {
+ int value; 
+};
+class Stack {
+private:
+ static const int MAX = 100; 
+ DataItem arr[MAX]; 
+ int top; 
+public:
+ Stack() {
+ top = -1;
+ }
+ void push(const DataItem item) {
+ if (top >= (MAX - 1)) {
+ cout << "Stack Overflow" << endl;
+ return;
+ }
+ arr[++top] = item; 
+ cout << "Pushed item with value: " << item.value << endl;
+ }
+ int pop() {
+ if (top < 0) {
+ cout << "Stack Underflow" << endl;
+ return -1; 
+ }
+ return arr[top--].value; 
+ }
+ DataItem peek() {
+ if (top < 0) {
+ cout << "Stack is Empty" << endl;
+ return DataItem{-1}; 
+ }
+ return arr[top
+ }
+ bool isEmpty() {
+ return (top < 0);
+ }
+ void clear() {
+ top = -1; 
+ cout << "Stack cleared" << endl;
+ }
+};
+int main() {
+ Stack s; 
+ DataItem item1 = {10};
+ DataItem item2 = {20};
+ DataItem item3 = {30};
+ s.push(item1);
+ s.push(item2);
+ s.push(item3);
+ DataItem topItem = s.peek(); 
+ if (topItem.value != -1) {
+ cout << "Top item has value: " << topItem.value << endl;
+ }
+ s.clear(); 
+ if (s.isEmpty()) {
+ cout << "Stack is empty after clear" << endl;
+ } else {
+ cout << "Stack is not empty after clear" << endl;
+ }
+ return 0;
+}
+7: Bool isEmpty () Requirements: None Results: 
+Returns true if a stack is empty. Otherwise, returns 
+false.
+#include <iostream>
+using namespace std;
+struct DataItem {
+ int value; 
+};
+class Stack {
+private:
+ static const int MAX = 100; 
+ DataItem arr[MAX]; 
+ int top; 
+25 | P a g e
+public:
+ Stack() {
+ top = -1;
+ }
+ void push(const DataItem item) {
+ if (top >= (MAX - 1)) {
+ cout << "Stack Overflow" << endl;
+ return;
+ }
+ arr[++top] = item; 
+ cout << "Pushed item with value: " << item.value << endl;
+ }
+ int pop() {
+ if (top < 0) {
+ cout << "Stack Underflow" << endl;
+ return -1; 
+ }
+ return arr[top--].value; 
+ }
+ DataItem peek() {
+ if (top < 0) {
+ cout << "Stack is Empty" << endl;
+ return DataItem{-1}; 
+ }
+ return arr[top]; 
+ }
+ bool isEmpty() {
+ return (top < 0); 
+ }
+ void clear() {
+ top = -1; 
+ cout << "Stack cleared" << endl;
+ }
+};
+int main() {
+ Stack s; 
+ 
+ DataItem item1 = {10};
+ DataItem item2 = {20};
+ DataItem item3 = {30};
+27 | P a g e
+ s.push(item1);
+ s.push(item2);
+ s.push(item3);
+ if (s.isEmpty()) {
+ cout << "Stack is empty" << endl;
+ } else {
+ cout << "Stack is not empty" << endl;
+ }
+ DataItem topItem = s.peek(); 
+ if (topItem.value != -1) {
+ cout << "Top item has value: " << topItem.value << endl;
+ }
+ s.clear(); 
+ if (s.isEmpty()) {
+ cout << "Stack is empty after clear" << endl;
+ } else {
+ cout << "Stack is not empty after clear" << endl;
+ }
+ return 0;
+28 | P a g e
+}
